@@ -1,0 +1,8 @@
+com\xwj\properties\SecurityProperty.class
+com\xwj\properties\LoginType.class
+com\xwj\properties\QQProperty.class
+com\xwj\config\SecurityCoreConfig.class
+com\xwj\support\SimpleResponse.class
+com\xwj\properties\SocialProperty.class
+com\xwj\entity\MyUser.class
+com\xwj\properties\BrowserProperty.class

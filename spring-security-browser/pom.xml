@@ -22,28 +22,6 @@
 			<artifactId>spring-security-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-		<!-- spring-social相关 -->
-		<dependency>
-			<!-- 提供Java 配置 -->
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-config</artifactId>
-		</dependency>
-		<dependency>
-			<!-- 提供社交连接框架和OAuth 客户端支持 -->
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-core</artifactId>
-		</dependency>
-		<dependency>
-			<!-- 社交安全的一些支持 -->
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-security</artifactId>
-		</dependency>
-		<dependency>
-			<!-- 管理web应用程序的连接 -->
-			<groupId>org.springframework.social</groupId>
-			<artifactId>spring-social-web</artifactId>
-		</dependency>
-
 	</dependencies>
 
 </project>

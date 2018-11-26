@@ -10,7 +10,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "security")
+@ConfigurationProperties(prefix = "xwj.security")
 public class SecurityProperty {
 
 	private BrowserProperty browser = new BrowserProperty();

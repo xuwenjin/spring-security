@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
  * 配置认证服务器
@@ -21,13 +22,19 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Autowired
 	private UserDetailsService userDetailsService;
+	
+	@Autowired
+	private TokenStore redisTokenStore;
 
 	/**
 	 * 用来配置授权（authorization）以及令牌（token）的访问端点和令牌服务(token services)
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.authenticationManager(authenticationManager).userDetailsService(userDetailsService);
+		endpoints
+			.tokenStore(redisTokenStore)
+			.authenticationManager(authenticationManager)
+			.userDetailsService(userDetailsService);
 		/*
 		 * pathMapping用来配置端点URL链接，有两个参数，都将以 "/" 字符为开始的字符串
 		 * defaultPath：这个端点URL的默认链接 customPath：你要进行替代的URL链接

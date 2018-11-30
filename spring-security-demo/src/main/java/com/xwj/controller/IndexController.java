@@ -24,6 +24,14 @@ public class IndexController {
 	public String noAuth() {
 		return "noAuth";
 	}
+	
+	/**
+	 * 需要认证的请求
+	 */
+	@GetMapping("/user")
+	public String user() {
+		return "user";
+	}
 
 	/**
 	 * 获取认证信息

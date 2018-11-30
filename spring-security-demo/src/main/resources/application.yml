@@ -5,8 +5,7 @@ app:
     dbname: xwj
     
 server:
-  port: 8060
-  #port: 80
+  port: 18081
     
 spring:
   application:

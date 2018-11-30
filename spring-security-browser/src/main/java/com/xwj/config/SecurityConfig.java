@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private SpringSocialConfigurer socialSecurityConfig;
-
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		this.applyPasswordAuthenticationConfig(http);

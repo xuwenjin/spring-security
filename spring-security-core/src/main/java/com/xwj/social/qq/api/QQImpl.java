@@ -1,4 +1,4 @@
-package com.xwj.social.qq.api.impl;
+package com.xwj.social.qq.api;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.social.oauth2.AbstractOAuth2ApiBinding;
@@ -51,7 +51,7 @@ public class QQImpl extends AbstractOAuth2ApiBinding implements QQ {
 		QQUserInfo userInfo = null;
 		try {
 			userInfo = objectMapper.readValue(result, QQUserInfo.class);
-			// userInfo.setOpenId(openId);
+			userInfo.setOpenId(openId);
 			return userInfo;
 		} catch (Exception e) {
 			throw new RuntimeException("获取用户信息失败", e);

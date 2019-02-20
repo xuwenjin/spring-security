@@ -17,6 +17,7 @@ import org.springframework.social.security.SpringSocialConfigurer;
 import com.xwj.consts.SecurityConst;
 import com.xwj.handler.LoginFailureHandler;
 import com.xwj.handler.LoginSuccessHandler;
+import com.xwj.properties.BrowserProperty;
 import com.xwj.properties.SecurityProperty;
 
 @Configuration
@@ -44,20 +45,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		BrowserProperty browser = securityProperty.getBrowser();
+		
 		this.applyPasswordAuthenticationConfig(http);
 
-		http.apply(socialSecurityConfig)
+		http.apply(socialSecurityConfig) //社交配置
 				.and()
 			.rememberMe().userDetailsService(myUserDetailServiceImpl) // 设置userDetailsService
 				.tokenRepository(persistentTokenRepository()) // 设置数据访问层
-				.tokenValiditySeconds(securityProperty.getBrowser().getRememberMeTime()) // 记住我的时间(秒)
+				.tokenValiditySeconds(browser.getRememberMeTime()) // 记住我的时间(秒)
 				.and()
 			.authorizeRequests() // 对请求授权
-				.antMatchers(SecurityConst.AUTH_REQUIRE, securityProperty.getBrowser().getLoginPage())
+				.antMatchers(SecurityConst.AUTH_REQUIRE, browser.getLoginPage()
+						, browser.getSignUpUrl(), 
+						"/user/regist") ////处理社交注册请求
 				.permitAll() // 允许所有人访问login.html和自定义的登录页
 				.anyRequest() // 任何请求
 				.authenticated()// 需要身份认证
-				.and().csrf().disable() // 关闭跨站伪造
+				.and().csrf().disable() // 关闭跨站伪造保护
+				.cors() //开启跨域
 		;
 	}
 

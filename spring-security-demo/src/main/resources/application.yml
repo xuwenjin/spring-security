@@ -5,7 +5,7 @@ app:
     dbname: xwj
     
 server:
-  port: 18081
+  port: 80
     
 spring:
   application:
@@ -69,11 +69,15 @@ xwj:
     browser: 
       #loginPage: /plogin.html
       loginType: REDIRECT
+      signUpUrl: /demo-signUp.html
     social:
-      filterProcessesUrl: /login
+      #filterProcessesUrl: /login
       qq:
         app-id: 101386962
         app-secret: 2a0f820407df400b84a854d054be8b6a
+      weixin:
+        app-id: 
+        app-secret: 
       
 #security:
   #oauth2:

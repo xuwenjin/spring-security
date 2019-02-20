@@ -10,6 +10,8 @@ import lombok.Setter;
 @Setter
 public class BrowserProperty {
 
+	private String signUpUrl = "/signUp.html"; // 注册页
+
 	private String loginPage = "/login.html"; // 登录页
 
 	private LoginType loginType = LoginType.JSON; // 登录类型

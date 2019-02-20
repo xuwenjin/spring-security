@@ -12,7 +12,7 @@ import com.xwj.social.qq.connect.QQConnectionFactory;
 
 @Configuration
 // 当配置了app-id的时候才启用
-@ConditionalOnProperty(prefix = "security.social.qq", name = "appId")
+@ConditionalOnProperty(prefix = "xwj.security.social.qq", name = "app-id")
 public class QQAutoConfig extends SocialAutoConfigurerAdapter {
 
 	@Autowired

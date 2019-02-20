@@ -9,7 +9,7 @@ public class QQUserInfo {
 	/**
 	 * 用户的ID，与QQ号码一一对应。
 	 */
-	private String operId;
+	private String openId;
 	/**
 	 * 返回码
 	 */

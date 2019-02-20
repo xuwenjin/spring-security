@@ -1,4 +1,4 @@
-package com.xwj.social.qq.config;
+package com.xwj.social;
 
 import org.springframework.social.security.SocialAuthenticationFilter;
 import org.springframework.social.security.SpringSocialConfigurer;
@@ -8,7 +8,7 @@ import lombok.Setter;
 
 @Setter
 @AllArgsConstructor
-public class OAuthSpringSocialConfigurer extends SpringSocialConfigurer {
+public class MySpringSocialConfigurer extends SpringSocialConfigurer {
 
 	private String filterProcessesUrl;
 
@@ -16,6 +16,7 @@ public class OAuthSpringSocialConfigurer extends SpringSocialConfigurer {
 	@Override
 	protected <T> T postProcess(T object) {
 		SocialAuthenticationFilter filter = (SocialAuthenticationFilter) super.postProcess(object);
+		// 改变拦截url
 		filter.setFilterProcessesUrl(filterProcessesUrl);
 		return (T) filter;
 	}

@@ -19,7 +19,9 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "global_id_gen")
 	private Long id;
 
-	private String lastName;
+	private String username;
+
+	private String password;
 
 	private String email;
 

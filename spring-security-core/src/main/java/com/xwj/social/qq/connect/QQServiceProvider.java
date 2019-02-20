@@ -1,10 +1,9 @@
 package com.xwj.social.qq.connect;
 
 import org.springframework.social.oauth2.AbstractOAuth2ServiceProvider;
-import org.springframework.social.oauth2.OAuth2Template;
 
 import com.xwj.social.qq.api.QQ;
-import com.xwj.social.qq.api.impl.QQImpl;
+import com.xwj.social.qq.api.QQImpl;
 
 /**
  * 连接服务提供商
@@ -23,7 +22,8 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> {
 	private String appId;
 
 	public QQServiceProvider(String appId, String appSecret) {
-		super(new OAuth2Template(appId, appSecret, URL_AUTHORIZE, URL_ACCESS_TOKEN));
+		super(new QQOAuth2Template(appId, appSecret, URL_AUTHORIZE, URL_ACCESS_TOKEN));
+		this.appId = appId;
 	}
 
 	@Override

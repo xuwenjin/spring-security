@@ -35,7 +35,6 @@ public class MyUserDetailServiceImpl implements UserDetailsService, SocialUserDe
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		log.info("登录用户名:{}", username);
-		// return new MyUser(username, dbPassword);
 		return buildUser(username);
 	}
 

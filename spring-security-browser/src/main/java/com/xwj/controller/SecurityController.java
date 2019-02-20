@@ -11,13 +11,18 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.web.ProviderSignInUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.ServletWebRequest;
 
 import com.xwj.consts.SecurityConst;
 import com.xwj.properties.SecurityProperty;
 import com.xwj.support.SimpleResponse;
+import com.xwj.support.SocialUserInfo;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +37,9 @@ public class SecurityController {
 
 	@Autowired
 	private SecurityProperty securityProperty;
+
+	@Autowired
+	private ProviderSignInUtils providerSignInUtils;
 
 	/**
 	 * 当需要身份认证时，跳转到这里 (如果是html请求，则跳转到登录页，否则返回401状态码和错误信息)
@@ -51,6 +59,21 @@ public class SecurityController {
 			}
 		}
 		return new SimpleResponse("访问的服务需要身份认证，请引导用户到登录页");
+	}
+
+	/**
+	 * 获取Social信息
+	 */
+	@GetMapping("/social/user")
+	public SocialUserInfo getSocialUserInfo(HttpServletRequest request) {
+		SocialUserInfo userInfo = new SocialUserInfo();
+		// 从request中获取Social信息
+		Connection<?> connection = providerSignInUtils.getConnectionFromSession(new ServletWebRequest(request));
+		userInfo.setProviderId(connection.getKey().getProviderId());
+		userInfo.setProviderUserId(connection.getKey().getProviderUserId());
+		userInfo.setNickname(connection.getDisplayName());
+		userInfo.setHeadimg(connection.getImageUrl());
+		return userInfo;
 	}
 
 }

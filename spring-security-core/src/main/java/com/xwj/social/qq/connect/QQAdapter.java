@@ -29,7 +29,7 @@ public class QQAdapter implements ApiAdapter<QQ> {
 		values.setDisplayName(userInfo.getNickname());
 		values.setImageUrl(userInfo.getFigureurl_qq_1());
 		values.setProfileUrl(null); // 主页地址。QQ没有，微博有
-		values.setProviderUserId(userInfo.getOperId());// 服务提供商返回的该user的openId
+		values.setProviderUserId(userInfo.getOpenId());// 服务提供商返回的该user的openId
 	}
 
 	@Override

@@ -9,13 +9,19 @@ import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.social.config.annotation.EnableSocial;
 import org.springframework.social.config.annotation.SocialConfigurerAdapter;
 import org.springframework.social.connect.ConnectionFactoryLocator;
+import org.springframework.social.connect.ConnectionSignUp;
 import org.springframework.social.connect.UsersConnectionRepository;
 import org.springframework.social.connect.jdbc.JdbcUsersConnectionRepository;
+import org.springframework.social.connect.web.ProviderSignInUtils;
 import org.springframework.social.security.SpringSocialConfigurer;
 
 import com.xwj.properties.SecurityProperty;
-import com.xwj.social.qq.config.OAuthSpringSocialConfigurer;
 
+/**
+ * 社交登录配置主类
+ * 
+ * @author xwj
+ */
 @Configuration
 @EnableSocial
 public class SocialConfig extends SocialConfigurerAdapter {
@@ -26,6 +32,9 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	@Autowired
 	private SecurityProperty securityProperty;
 
+	@Autowired(required = false)
+	private ConnectionSignUp connectionSignUp;
+
 	@Override
 	public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
 		/**
@@ -34,6 +43,13 @@ public class SocialConfig extends SocialConfigurerAdapter {
 		JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource,
 				connectionFactoryLocator, Encryptors.noOpText());
 		repository.setTablePrefix("xwj_"); // 设置表名前缀
+
+		// 如果服务调用方配置了ConnectionSignUp的实现类
+		if (connectionSignUp != null) {
+			// 用户授权后，不需要注册，直接登录
+//			repository.setConnectionSignUp(connectionSignUp);
+		}
+
 		return repository;
 	}
 
@@ -42,9 +58,21 @@ public class SocialConfig extends SocialConfigurerAdapter {
 	 */
 	@Bean
 	public SpringSocialConfigurer socialSecurityConfig() {
+		// 设置拦截url
 		String filterProcessesUrl = securityProperty.getSocial().getFilterProcessesUrl();
-		OAuthSpringSocialConfigurer config = new OAuthSpringSocialConfigurer(filterProcessesUrl);
+		MySpringSocialConfigurer config = new MySpringSocialConfigurer(filterProcessesUrl);
+		// 设置注册页地址
+		config.signupUrl(securityProperty.getBrowser().getSignUpUrl());
 		return config;
+	}
+
+	/**
+	 * spring Social工具类。有两个目的： 1、注册过程中，获取Social信息 2、注册完成后，把用户id传给Social
+	 */
+	@Bean
+	public ProviderSignInUtils providerSignInUtils(ConnectionFactoryLocator connectionFactoryLocator) {
+		return new ProviderSignInUtils(connectionFactoryLocator,
+				getUsersConnectionRepository(connectionFactoryLocator));
 	}
 
 }

@@ -6,15 +6,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * qq配置类
+ * 微信配置类
  * 
  * @author xuwenjin 2019年1月26日
  */
 @Getter
 @Setter
-public class QQProperty extends SocialProperties {
+public class WeixinProperty extends SocialProperties {
 
 	/** 提供方id */
-	private String providerId = "qq";
+	private String providerId = "weixin";
 
 }

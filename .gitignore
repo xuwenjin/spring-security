@@ -1,5 +1,3 @@
-
-
 # Created by .ignore support plugin (hsz.mobi)
 ### Windows template
 # Windows thumbnail cache files
@@ -39,7 +37,6 @@ local.properties
 .recommenders
 .classpath
 .project
-hsf.lock
 
 # External tool builders
 .externalToolBuilders/

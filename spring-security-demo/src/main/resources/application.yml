@@ -76,8 +76,8 @@ xwj:
         app-id: 101386962
         app-secret: 2a0f820407df400b84a854d054be8b6a
       weixin:
-        app-id: 
-        app-secret: 
+        app-id: wx77cd44440d2c3e55
+        app-secret: 5ffb785165fd74b73644c48ac0668278
       
 #security:
   #oauth2:

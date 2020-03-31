@@ -7,6 +7,8 @@ import lombok.Setter;
 @Setter
 public class OAuth2Property {
 
+	private String jwtSignKey = "123456";
+
 	private OAuth2ClientProperty[] clients = {};
 
 }

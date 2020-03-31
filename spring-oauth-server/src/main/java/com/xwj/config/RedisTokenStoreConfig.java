@@ -1,6 +1,7 @@
 package com.xwj.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -8,10 +9,11 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
 /**
- * Token存储配置
+ * RedisTokenStore配置
  */
 @Configuration
-public class TokenStoreConfig {
+@ConditionalOnProperty(prefix = "xwj.security.oauth2", name = "storeType", havingValue = "redis")
+public class RedisTokenStoreConfig {
 
 	@Autowired
 	private RedisConnectionFactory connectionFactory;

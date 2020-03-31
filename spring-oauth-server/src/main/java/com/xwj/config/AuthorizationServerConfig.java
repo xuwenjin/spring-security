@@ -11,6 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import com.xwj.properties.OAuth2ClientProperty;
 import com.xwj.properties.SecurityProperty;
@@ -24,23 +25,27 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Autowired
 	private AuthenticationManager authenticationManager;
-
 	@Autowired
 	private UserDetailsService userDetailsService;
-
-	@Autowired
-	private TokenStore redisTokenStore;
-
 	@Autowired
 	private SecurityProperty securityProperty;
+	@Autowired
+	private TokenStore tokenStore;
+	@Autowired(required = false)
+	private JwtAccessTokenConverter jwtAccessTokenConverter;
 
 	/**
 	 * 用来配置授权（authorization）以及令牌（token）的访问端点和令牌服务(token services)
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(redisTokenStore).authenticationManager(authenticationManager)
+		endpoints.tokenStore(tokenStore).authenticationManager(authenticationManager)
 				.userDetailsService(userDetailsService);
+
+		if (jwtAccessTokenConverter != null) {
+			endpoints.accessTokenConverter(jwtAccessTokenConverter);
+		}
+
 		/*
 		 * pathMapping用来配置端点URL链接，有两个参数，都将以 "/" 字符为开始的字符串
 		 * 

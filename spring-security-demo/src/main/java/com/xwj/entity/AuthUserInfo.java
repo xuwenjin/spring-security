@@ -12,19 +12,20 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class User {
+public class AuthUserInfo {
 
 	@Id
 	@TableGenerator(name = "global_id_gen", allocationSize = 1)
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "global_id_gen")
 	private Long id;
 
+	/** 用户名 */
 	private String username;
 
+	/** 密码 */
 	private String password;
 
-	private String email;
-
-	private Integer age;
+	/** 角色 */
+	private String role;
 
 }

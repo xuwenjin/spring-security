@@ -3,13 +3,10 @@ package com.xwj.controller;
 import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xwj.entity.User;
 import com.xwj.properties.SecurityProperty;
-import com.xwj.service.IUserService;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -18,8 +15,6 @@ import io.jsonwebtoken.Jwts;
 @RequestMapping
 public class IndexController {
 
-	@Autowired
-	private IUserService userService;
 	@Autowired
 	private SecurityProperty securityProperty;
 
@@ -34,9 +29,9 @@ public class IndexController {
 	/**
 	 * 需要认证的请求
 	 */
-	@GetMapping("/user")
-	public String user() {
-		return "user";
+	@GetMapping("/auth")
+	public String auth() {
+		return "auth";
 	}
 
 	/**
@@ -55,11 +50,6 @@ public class IndexController {
 	@GetMapping("/me")
 	public Authentication authentication(Authentication authentication) {
 		return authentication;
-	}
-
-	@GetMapping("/find/{id}")
-	public User findById(@PathVariable Long id) {
-		return userService.findById(id);
 	}
 
 }

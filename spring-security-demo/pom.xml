@@ -27,13 +27,13 @@
 			<artifactId>druid</artifactId>
 			<version>1.0.5</version>
 		</dependency>
-		<!-- <dependency> <groupId>com.xwj</groupId> <artifactId>spring-security-browser</artifactId> 
-			<version>0.0.1-SNAPSHOT</version> </dependency> -->
 		<dependency>
 			<groupId>com.xwj</groupId>
-			<artifactId>spring-oauth-server</artifactId>
+			<artifactId>spring-security-browser</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+	<!-- <dependency> <groupId>com.xwj</groupId> <artifactId>spring-oauth-server</artifactId> 
+		<version>0.0.1-SNAPSHOT</version> </dependency> -->
 		<dependency>
 			<!-- jwt -->
 			<groupId>io.jsonwebtoken</groupId>

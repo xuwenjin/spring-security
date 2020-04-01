@@ -1,9 +1,13 @@
 package com.xwj.service;
 
-import com.xwj.entity.User;
+import com.xwj.entity.AuthUserInfo;
 
 public interface IUserService {
-	
-	User findById(Long id);
+
+	AuthUserInfo findById(Long id);
+
+	AuthUserInfo save(AuthUserInfo info);
+
+	AuthUserInfo findByUsername(String username);
 
 }

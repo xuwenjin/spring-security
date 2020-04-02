@@ -34,6 +34,11 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
+	public List<AuthUserInfo> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
 	public AuthUserInfo findById(Long id) {
 		return userRepository.findOne(id);
 	}

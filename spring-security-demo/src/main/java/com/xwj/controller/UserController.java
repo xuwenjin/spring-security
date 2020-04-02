@@ -1,5 +1,7 @@
 package com.xwj.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,14 @@ public class UserController {
 	private ProviderSignInUtils providerSignInUtils;
 	@Autowired
 	private IUserService userService;
+
+	/**
+	 * 查询所有用户
+	 */
+	@GetMapping("findAll")
+	public List<AuthUserInfo> findAll() {
+		return userService.findAll();
+	}
 
 	/**
 	 * 查询用户信息

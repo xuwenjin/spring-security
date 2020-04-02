@@ -88,7 +88,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 						.withClient(config.getClientId()) // client_id(这里配置了之后，那么客户端配置的这个就不起作用了)
 						.secret(config.getClientSecret())// client_secret
 						.accessTokenValiditySeconds(config.getAccessTokenValiditySeconds()) // 发出去的令牌有效时间(秒)
-						.authorizedGrantTypes("authorization_code", "password", "refresh_token") // 该client允许的授权类型
+						.authorizedGrantTypes("authorization_code", "client_credentials", "password", "refresh_token") // 该client允许的授权类型
 						.scopes("all", "read", "write") // 允许的授权范围(如果是all，则请求中可以不要scope参数，否则必须加上scopes中配置的)
 						.autoApprove(true); // 自动审核
 			}

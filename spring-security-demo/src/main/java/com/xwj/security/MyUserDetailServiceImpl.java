@@ -32,10 +32,6 @@ public class MyUserDetailServiceImpl implements UserDetailsService, SocialUserDe
 	@Autowired
 	private IUserService userService;
 
-	/** 默认角色 */
-	private List<? extends GrantedAuthority> authorities = AuthorityUtils
-			.commaSeparatedStringToAuthorityList("ROLE_USER");
-
 	/**
 	 * 根据username查询用户实体
 	 */
@@ -45,7 +41,7 @@ public class MyUserDetailServiceImpl implements UserDetailsService, SocialUserDe
 		AuthUserInfo userInfo = userService.findByUsername(username);
 		if (userInfo == null) {
 			log.error("User '" + username + "' not found");
-			throw new BadCredentialsException("用户名不存在");
+			throw new BadCredentialsException("User '" + username + "' not found");
 		}
 
 		// 密码加密
@@ -62,10 +58,12 @@ public class MyUserDetailServiceImpl implements UserDetailsService, SocialUserDe
 
 	@Override
 	public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
-		log.info("登录用户名:{}", userId);
 		// 密码加密(这里是将密码写死的，真实情况应该是查询数据库)
 		String dbPassword = passwordEncoder.encode("1234");
-		log.info("数据库密码{}", dbPassword);
+
+		// 默认授权角色
+		List<? extends GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+
 		return new SocialUser(userId, dbPassword, true, true, true, true, authorities);
 	}
 

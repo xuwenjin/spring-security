@@ -13,26 +13,18 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 @RestController
-@RequestMapping
+@RequestMapping("index")
 public class IndexController {
 
 	@Autowired
 	private SecurityProperty securityProperty;
 
 	/**
-	 * 不需要认证的请求
+	 * 获取资源
 	 */
-	@GetMapping("/noAuth")
-	public String noAuth() {
-		return "noAuth";
-	}
-
-	/**
-	 * 需要认证的请求
-	 */
-	@GetMapping("/auth")
-	public String auth() {
-		return "auth";
+	@GetMapping("/getResource")
+	public String getResource() {
+		return "OK";
 	}
 
 	/**

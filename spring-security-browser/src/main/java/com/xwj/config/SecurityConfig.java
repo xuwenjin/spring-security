@@ -59,7 +59,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(SecurityConst.AUTH_REQUIRE, browser.getLoginPage(), browser.getSignUpUrl(), "/user/regist") //// 处理社交注册请求
 				.permitAll() // 允许所有人访问login.html和自定义的登录页
 
-				.antMatchers(HttpMethod.GET, "/user/*").hasRole("user") // user角色，只能访问/user/*下面的get请求
+				.antMatchers(HttpMethod.GET, "/user/**").hasRole("user") // user角色，只能访问/user/*下面的get请求
 				.antMatchers("/auth").hasRole("admin") // admin角色，只能访问/auth请求
 
 				.anyRequest().authenticated() // 任何请求，需要身份认证

@@ -18,12 +18,11 @@ import org.springframework.stereotype.Service;
 import com.xwj.entity.AuthUserInfo;
 import com.xwj.service.IUserService;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
- * UserDetailsService用于返回用户相关数据
+ * 如果使用密码模式，需要实现UserDetailsService，用于覆盖默认的InMemoryUserDetailsManager方法
+ * 
+ * 可以用来校验用户信息，并且可以添加自定义的用户属性
  */
-@Slf4j
 @Service
 public class MyUserDetailServiceImpl implements UserDetailsService, SocialUserDetailsService {
 
@@ -40,18 +39,15 @@ public class MyUserDetailServiceImpl implements UserDetailsService, SocialUserDe
 		// 通过用户名查询数据
 		AuthUserInfo userInfo = userService.findByUsername(username);
 		if (userInfo == null) {
-			log.error("User '" + username + "' not found");
 			throw new BadCredentialsException("User '" + username + "' not found");
 		}
 
-		// 密码加密
+		// 数据库没有加密，所以这里加密下
 		String dbPassword = passwordEncoder.encode(userInfo.getPassword());
 
 		// 用户角色
 		List<? extends GrantedAuthority> authorities = AuthorityUtils
 				.commaSeparatedStringToAuthorityList("ROLE_" + userInfo.getRole());
-
-		// TODO 判断是否过期
 
 		return new SocialUser(username, dbPassword, true, true, true, true, authorities);
 	}

@@ -54,6 +54,7 @@ logging:
 xwj:
   security:
     oauth2:
+      storeType: redis
       jwtSignKey: 1234567890
       clients[0]:
         clientId: test

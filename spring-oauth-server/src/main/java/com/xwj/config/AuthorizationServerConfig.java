@@ -39,10 +39,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	 */
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.tokenStore(tokenStore) // 配置存储token的方式
+		endpoints.tokenStore(tokenStore) // 配置存储token的方式(默认InMemoryTokenStore)
 				.authenticationManager(authenticationManager) // 密码模式，必须配置AuthenticationManager，不然不生效
 				.userDetailsService(userDetailsService); // 密码模式，这里得配置UserDetailsService
 
+		// JwtTokenStore时，需要设置JwtAccessTokenConverter
 		if (jwtAccessTokenConverter != null) {
 			endpoints.accessTokenConverter(jwtAccessTokenConverter);
 		}

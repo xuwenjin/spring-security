@@ -77,11 +77,3 @@ xwj:
         app-id: wx77cd44440d2c3e55
         app-secret: 5ffb785165fd74b73644c48ac0668278
     
-      
-security:
-  oauth2:
-    client:
-      client-id: myid
-      client-secret: mysecret
-    
-      

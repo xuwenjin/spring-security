@@ -1,4 +1,3 @@
-D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\config\SecurityCoreConfig.java
 D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\social\weixin\api\WeixinImpl.java
 D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\entity\MyUser.java
 D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\social\qq\api\QQImpl.java
@@ -7,6 +6,7 @@ D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\prop
 D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\social\qq\api\QQUserInfo.java
 D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\social\weixin\connect\WeixinAdapter.java
 D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\social\weixin\config\WexinAutoConfig.java
+D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\config\PasswordEncoderConfig.java
 D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\properties\LoginType.java
 D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\properties\WeixinProperty.java
 D:\workspace_xwj\spring-security\spring-security-core\src\main\java\com\xwj\social\qq\connect\QQOAuth2Template.java

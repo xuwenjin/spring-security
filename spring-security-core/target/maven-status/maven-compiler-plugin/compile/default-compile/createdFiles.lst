@@ -11,7 +11,6 @@ com\xwj\properties\SecurityProperty.class
 com\xwj\properties\OAuth2Property.class
 com\xwj\support\SocialUserInfo.class
 com\xwj\social\weixin\config\WexinAutoConfig.class
-com\xwj\config\SecurityCoreConfig.class
 com\xwj\social\qq\connect\QQServiceProvider.class
 com\xwj\social\qq\connect\QQAdapter.class
 com\xwj\social\qq\api\QQ.class

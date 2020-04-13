@@ -9,7 +9,6 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.social.security.SocialUser;
 import org.springframework.social.security.SocialUserDetails;
 import org.springframework.social.security.SocialUserDetailsService;
@@ -27,8 +26,6 @@ import com.xwj.service.IUserService;
 public class MyUserDetailServiceImpl implements UserDetailsService, SocialUserDetailsService {
 
 	@Autowired
-	private PasswordEncoder passwordEncoder;
-	@Autowired
 	private IUserService userService;
 
 	/**
@@ -42,25 +39,25 @@ public class MyUserDetailServiceImpl implements UserDetailsService, SocialUserDe
 			throw new BadCredentialsException("User '" + username + "' not found");
 		}
 
-		// 数据库没有加密，所以这里加密下
-		String dbPassword = passwordEncoder.encode(userInfo.getPassword());
-
 		// 用户角色
 		List<? extends GrantedAuthority> authorities = AuthorityUtils
 				.commaSeparatedStringToAuthorityList("ROLE_" + userInfo.getRole());
 
-		return new SocialUser(username, dbPassword, true, true, true, true, authorities);
+		return new SocialUser(username, userInfo.getPassword(), true, true, true, true, authorities);
 	}
 
 	@Override
 	public SocialUserDetails loadUserByUserId(String userId) throws UsernameNotFoundException {
-		// 密码加密(这里是将密码写死的，真实情况应该是查询数据库)
-		String dbPassword = passwordEncoder.encode("1234");
+		// 通过用户名查询数据
+		AuthUserInfo userInfo = userService.findByUsername(userId);
+		if (userInfo == null) {
+			throw new BadCredentialsException("User '" + userId + "' not found");
+		}
 
 		// 默认授权角色
 		List<? extends GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
 
-		return new SocialUser(userId, dbPassword, true, true, true, true, authorities);
+		return new SocialUser(userId, userInfo.getPassword(), true, true, true, true, authorities);
 	}
 
 }

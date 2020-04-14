@@ -9,12 +9,14 @@ META-INF\spring-configuration-metadata.json
 com\xwj\social\weixin\connect\WeixinServiceProvider.class
 com\xwj\properties\SecurityProperty.class
 com\xwj\properties\OAuth2Property.class
+com\xwj\config\PasswordEncoderConfig.class
 com\xwj\support\SocialUserInfo.class
 com\xwj\social\weixin\config\WexinAutoConfig.class
 com\xwj\social\qq\connect\QQServiceProvider.class
 com\xwj\social\qq\connect\QQAdapter.class
 com\xwj\social\qq\api\QQ.class
 com\xwj\properties\QQProperty.class
+com\xwj\config\PasswordEncoderConfig$1.class
 com\xwj\social\weixin\connect\WeixinOAuth2Template.class
 com\xwj\social\SocialConfig.class
 com\xwj\social\weixin\connect\WeixinAccessGrant.class
